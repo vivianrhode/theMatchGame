@@ -1,0 +1,26 @@
+
+label{
+    color: white;
+}
+#contorl-panel{
+    height: 50px;
+    color: white;
+    margin-bottom: 40px;
+}
+form select{
+    margin-right: 5px;
+}
+form button{
+    width: 80px;
+    height: 30px;
+    border-radius:10px;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+form button:hover{
+    background-color: rgb(221, 143, 19);
+    color: white;
+}
