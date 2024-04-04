@@ -3,7 +3,7 @@
     padding: 0;
 }
 .container{
-    max-width: 800px;
+    max-width: 400px;
     width: 100%;
     margin: 0 auto;
     display: flex;
