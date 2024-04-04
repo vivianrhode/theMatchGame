@@ -85,7 +85,7 @@ function Game({clientGridSize,clientChooseType,clientnumbersRange,clientalphabet
         // ----------------根据得到的clientGridSize,来决定游戏的grid-------------------   
 
         const myGridStyle = Math.sqrt(clientGridSize);
-        const mygridWidth = 800/ myGridStyle;
+        const mygridWidth = 400/ myGridStyle;
         
     
 return (
