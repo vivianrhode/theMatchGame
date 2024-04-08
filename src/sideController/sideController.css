@@ -12,7 +12,7 @@ form select{
 }
 form button{
     width: 80px;
-    height: 30px;
+    height: 20px;
     border-radius:10px;
     cursor: pointer;
     border: none;
@@ -23,4 +23,22 @@ form button{
 form button:hover{
     background-color: rgb(221, 143, 19);
     color: white;
+}
+
+section{
+    display: inline;
+}
+@media screen and (max-width: 750px) {
+    form{
+        width:300px ;
+        margin:  0 auto;
+     }
+    section{
+        display: block;
+        margin: 10px;
+        text-align: left;
+    }
+    #contorl-panel{
+        margin-bottom: 100px;
+    }
 }
