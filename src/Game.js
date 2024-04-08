@@ -84,8 +84,35 @@ function Game({clientGridSize,clientChooseType,clientnumbersRange,clientalphabet
 
         // ----------------根据得到的clientGridSize,来决定游戏的grid-------------------   
 
-        const myGridStyle = Math.sqrt(clientGridSize);
-        const mygridWidth = 400/ myGridStyle;
+           const [windowSize, setWindowSize] = useState(typeof window !== "undefined" ? window.innerWidth : undefined);
+        useEffect( ()=>{
+            function handleResize(){
+                setWindowSize(window.innerWidth);
+            };
+            window.addEventListener('resize', handleResize);
+            handleResize();
+            return () => window.removeEventListener('resize', handleResize);
+        },[])
+        
+      
+        let myGridWidth;
+        if(windowSize >= 800){
+            const myGridStyle = Math.sqrt(clientGridSize);
+            myGridWidth = 800 / myGridStyle;
+            
+        }else if(windowSize < 800 && windowSize >= 600  ){
+            const myGridStyle = Math.sqrt(clientGridSize);
+           myGridWidth = 600 / myGridStyle;
+            
+        }else if(windowSize < 600 && windowSize >= 400  ){
+            const myGridStyle = Math.sqrt(clientGridSize);
+           myGridWidth = 400 / myGridStyle;
+            
+        }else if(windowSize < 400 ){
+            const myGridStyle = Math.sqrt(clientGridSize);
+            myGridWidth = 300 / myGridStyle;
+            
+        }
         
     
 return (
