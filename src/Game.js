@@ -39,7 +39,7 @@ function Game({clientGridSize,clientChooseType,clientnumbersRange,clientalphabet
                 const newLetterArr = checkLength(allNumbers,  halfGridSizeNumber );
                 const addTwoArrTogether = [...newLetterArr, ...newLetterArr]; // 直接复制一次
                 return shufflerArray(addTwoArrTogether);
-            }, [halfGridSizeNumber, shufflerArray]);
+            }, [shufflerArray,checkLength]);
         
             const bestArrays = useMemo(() => {
                 if (clientalphabetRange === 'uppercase') {
@@ -57,13 +57,21 @@ function Game({clientGridSize,clientChooseType,clientnumbersRange,clientalphabet
         // ----------------找到相同的,并且让相同项消失-------------------    
         const[lastClick, setLastClick] = useState(null);
         const [hiddenElements, setHiddenElements] = useState({});
+     
         const handleClick = (index, e) => {
-                const h2Context = e.target.parentElement.querySelector('h2').innerText;
-                const contextContainer = e.target.parentElement;
-                const clickElementIndex = contextContainer.parentElement.getAttribute('data-key');
+            const h2Context = e.target.parentElement.querySelector('h2').innerText;
+            const contextContainer = e.target.parentElement;
+            const clickElementIndex = contextContainer.parentElement.getAttribute('data-key');
+        
             setHiddenElements(prevState => {
-                // 如果已经点击过，且文本相同但不是同一个元素
-                if (lastClick && lastClick.h2Context === h2Context && lastClick.clickElementIndex !== clickElementIndex) {
+                // 检查当前点击的元素是否已经隐藏
+                if (prevState[clickElementIndex]) {
+                    // 如果已经隐藏，则直接返回 prevState，不做任何改变
+                    return prevState;
+                }
+        
+                // 如果已经点击过，且文本相同但不是同一个元素，并且之前的元素还没被隐藏
+                if (lastClick && lastClick.h2Context === h2Context && lastClick.clickElementIndex !== clickElementIndex && !prevState[lastClick.clickElementIndex]) {
                     return { ...prevState, [clickElementIndex]: true, [lastClick.clickElementIndex]: true };
                 } else {
                     // 更新 lastClick 状态
@@ -84,7 +92,10 @@ function Game({clientGridSize,clientChooseType,clientnumbersRange,clientalphabet
 
         // ----------------根据得到的clientGridSize,来决定游戏的grid-------------------   
 
-           const [windowSize, setWindowSize] = useState(typeof window !== "undefined" ? window.innerWidth : undefined);
+        // const myGridStyle = Math.sqrt(clientGridSize);
+        // const mygridWidth = 400/ myGridStyle;
+
+        const [windowSize, setWindowSize] = useState(typeof window !== "undefined" ? window.innerWidth : undefined);
         useEffect( ()=>{
             function handleResize(){
                 setWindowSize(window.innerWidth);
@@ -114,7 +125,7 @@ function Game({clientGridSize,clientChooseType,clientnumbersRange,clientalphabet
             
         }
         
-    
+
 return (
     <div className="App">
       <header className="App-header">
@@ -125,7 +136,7 @@ return (
                          key={index} 
                          data-key={index} 
                          onClick={(event) => handleClick(index,event)}
-                         style={{width:mygridWidth, height:mygridWidth }}
+                         style={{width:myGridWidth, height:myGridWidth }}
                     >
                         
                           <div className='contextContainer' style={{ display: hiddenElements[index] ? 'none' : 'block' }}>
