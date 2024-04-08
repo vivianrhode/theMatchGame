@@ -37,31 +37,36 @@ const SideController = ({setInputvalue,onButtonClick}) => {
         <>
            <div id='contorl-panel'>
                 <form onSubmit={handleSubmit}>
-                    <label > Choose Grid Size : </label>
-                    <select id="grid-size" name="grid-size" >
-                        <option value="4">2 x 2</option>
-                        <option value="16">4 x 4</option>
-                        <option value="36">6 x 6</option>
-                        <option value="64">8 x 8</option>
-                        <option value="100">10 x 10</option>
-                    </select>
-
+                    <section>
+                        <label > Choose Grid Size : </label>
+                        <select id="grid-size" name="grid-size" >
+                            <option value="4">2 x 2</option>
+                            <option value="16">4 x 4</option>
+                            <option value="36">6 x 6</option>
+                            <option value="64">8 x 8</option>
+                            <option value="100">10 x 10</option>
+                        </select>
+                    </section>
+                    <section>
                     <label > Choose Type : </label>
                     <select id="choice-type" name="choice-type" onChange={handleOnchange}>
                         <option value="numbers">numbers</option>
                         <option value="ABCs">ABCs</option>
                     </select>
-
+                    </section>
 
                     { checkType === 'ABCs'|| checkType ==='uppercase' ||checkType ==='lowercase'? 
                     <>
-                        <label > Choose alphabet Range: </label>
-                        <select id="alphabet-range" name="alphabet-range" onChange={handleOnchange}>
-                            <option value="uppercase">A-Z</option>
-                            <option value="lowercase">a-z</option>
-                        </select>
+                        <section>
+                            <label > Choose alphabet Range: </label>
+                            <select id="alphabet-range" name="alphabet-range" onChange={handleOnchange}>
+                                <option value="uppercase">A-Z</option>
+                                <option value="lowercase">a-z</option>
+                            </select>
+                        </section>
                     </> : 
                     <>
+                    <section>
                         <label > Choose Number Range: </label>
                         <select id="number-range" name="number-range" >
                             <option value="10">0 - 10</option>
@@ -75,10 +80,9 @@ const SideController = ({setInputvalue,onButtonClick}) => {
                             <option value="90">80 - 90</option>
                             <option value="100">90 - 100</option>
                         </select>
+                    </section>
                     </> }
-                    
-
-                    <button type="submit" onClick={onButtonClick}>Submit</button>
+                    <section><button type="submit" onClick={onButtonClick}>Submit</button></section>
                 </form>
             </div>
            
